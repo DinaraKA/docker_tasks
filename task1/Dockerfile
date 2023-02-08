@@ -1,12 +1,8 @@
-FROM openjdk:17
-COPY spring-petclinic app.jar
-# COPY src /App/src/
-# WORKDIR /App/
-CMD "java" "-jar" "/app.jar"
+FROM eclipse-temurin:17-jdk-jammy
+COPY spring-petclinic /app
+WORKDIR /app
+RUN ./mvnw dependency:resolve
 
-# COPY app/build/lib/* build/lib/
 
-# COPY app/build/libs/app.jar build/
 
-# WORKDIR /app/build
-# ENTRYPOINT java -jar app.jar
+CMD ["./mvnw", "spring-boot:run"]
